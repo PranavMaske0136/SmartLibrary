@@ -1,0 +1,16 @@
+# Vercel Deployment Ignore
+backend/build/
+backend/CMakeFiles/
+*.exe
+*.obj
+*.o
+.git
+.vscode
+.agents/
+Docs/
+test.cpp
+test.exe
+test2.cpp
+test2.exe
+.env
+.env.local

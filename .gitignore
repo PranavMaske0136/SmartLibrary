@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+
+# Neon & Vercel
+.neon
+.vercel
+
+# Build outputs & compiled binaries
+*.exe
+*.obj
+*.o
+backend/build/
+backend/CMakeFiles/
+
+# Editor & OS files
+.vscode/
+.DS_Store
+Thumbs.db
+
+.vercel
+.env*

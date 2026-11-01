@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Dashboard | Smart Library</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="website.css">
+</head>
+
+<body class="admin-page">
+
+    <!-- Admin Navigation Bar -->
+    <header class="navbar admin-navbar">
+        <div class="logo">
+            <span class="logo-icon">🛡️</span>
+            <span>Smart Library <small class="admin-badge">Admin Portal</small></span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="student.html">Student View</a>
+            <a href="../chatbot/chatbot.html">AI Assistant</a>
+            <a href="http://localhost:3000/api/health" target="_blank" class="nav-health-tag">Neon Live</a>
+        </nav>
+
+        <div class="nav-actions">
+            <span id="adminGreeting" class="admin-user-pill">Admin: System Administrator</span>
+            <button id="logoutBtn" class="logout-button">Logout</button>
+        </div>
+    </header>
+
+    <main class="admin-container">
+
+        <!-- Top Welcome & Status Banner -->
+        <section class="admin-header-banner">
+            <div>
+                <h1>Library Control Center</h1>
+                <p>Connected to <strong>Neon Serverless Postgres</strong> (<span id="branchName">production</span> branch)</p>
+            </div>
+            <button id="refreshDataBtn" class="refresh-btn">🔄 Refresh Data</button>
+        </section>
+
+        <!-- KPI Summary Cards -->
+        <section class="admin-kpi-grid">
+            <div class="kpi-card">
+                <span class="kpi-icon">📚</span>
+                <div>
+                    <h3 id="statTotalTitles">-</h3>
+                    <p>Book Titles</p>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-icon">📦</span>
+                <div>
+                    <h3 id="statTotalCopies">-</h3>
+                    <p>Total Stock</p>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-icon">✅</span>
+                <div>
+                    <h3 id="statAvailableCopies" class="stat-highlight-green">-</h3>
+                    <p>On Shelf</p>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-icon">🔄</span>
+                <div>
+                    <h3 id="statActiveLoans" class="stat-highlight-orange">-</h3>
+                    <p>Borrowed Books</p>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <span class="kpi-icon">🎓</span>
+                <div>
+                    <h3 id="statTotalStudents">-</h3>
+                    <p>Registered Students</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notification Banner -->
+        <div id="adminAlert" class="admin-alert" hidden></div>
+
+        <!-- Section Navigation Tabs -->
+        <div class="admin-nav-tabs">
+            <button class="admin-tab active" data-tab="booksTab">📚 Book Catalog</button>
+            <button class="admin-tab" data-tab="addBookTab">➕ Add New Book</button>
+            <button class="admin-tab" data-tab="circulationTab">🔄 Issue & Return</button>
+            <button class="admin-tab" data-tab="studentsTab">🎓 Registered Students</button>
+        </div>
+
+        <!-- =============================================================== -->
+        <!-- TAB 1: BOOK CATALOG MANAGEMENT                                 -->
+        <!-- =============================================================== -->
+        <section id="booksTab" class="admin-tab-content active">
+            <div class="table-card">
+                <div class="table-header">
+                    <h2>Library Books Catalog</h2>
+                    <input type="text" id="adminBookFilter" placeholder="Search books by title, author, or category..." class="table-search">
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Total Stock</th>
+                                <th>Available</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="booksTableBody">
+                            <tr><td colspan="7" class="loading-cell">Loading books from Neon Postgres...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TAB 2: ADD NEW BOOK                                            -->
+        <!-- =============================================================== -->
+        <section id="addBookTab" class="admin-tab-content">
+            <div class="form-card">
+                <h2>Add a New Book to Catalog</h2>
+                <p class="form-subtext">Directly inserts a book record into the Neon Postgres <code>books</code> table.</p>
+
+                <form id="addBookForm">
+                    <div class="form-grid">
+                        <div>
+                            <label for="newBookTitle">Book Title *</label>
+                            <input type="text" id="newBookTitle" placeholder="e.g. Clean Architecture" required>
+                        </div>
+                        <div>
+                            <label for="newBookAuthor">Author Name *</label>
+                            <input type="text" id="newBookAuthor" placeholder="e.g. Robert C. Martin" required>
+                        </div>
+                        <div>
+                            <label for="newBookCategory">Category *</label>
+                            <input type="text" id="newBookCategory" placeholder="e.g. Software Architecture" required>
+                        </div>
+                        <div>
+                            <label for="newBookQuantity">Quantity (Copies) *</label>
+                            <input type="number" id="newBookQuantity" min="1" value="3" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-action-btn">Add Book to Neon Postgres</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TAB 3: CIRCULATION (ISSUE & RETURN DESK)                        -->
+        <!-- =============================================================== -->
+        <section id="circulationTab" class="admin-tab-content">
+            <!-- Issue Book Form -->
+            <div class="form-card">
+                <h2>Issue a Book to a Student</h2>
+                <form id="issueBookForm" class="issue-form-grid">
+                    <div>
+                        <label for="issueBookSelect">Select Book *</label>
+                        <select id="issueBookSelect" required>
+                            <option value="">Loading available books...</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="issueStudentSelect">Select Student *</label>
+                        <select id="issueStudentSelect" required>
+                            <option value="">Loading students...</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="issueLoanDays">Loan Period (Days)</label>
+                        <input type="number" id="issueLoanDays" min="1" max="90" value="14">
+                    </div>
+                    <div class="button-align-bottom">
+                        <button type="submit" class="submit-action-btn">Issue Book</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Active Loans Table -->
+            <div class="table-card">
+                <h2>Current Borrowing Records</h2>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Loan ID</th>
+                                <th>Book Title</th>
+                                <th>Student Name</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="issuesTableBody">
+                            <tr><td colspan="7" class="loading-cell">Loading circulation records...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TAB 4: REGISTERED STUDENTS                                     -->
+        <!-- =============================================================== -->
+        <section id="studentsTab" class="admin-tab-content">
+            <div class="table-card">
+                <h2>Registered Student Patrons</h2>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>DB ID</th>
+                                <th>Student Code</th>
+                                <th>Full Name</th>
+                                <th>Institutional Email</th>
+                                <th>Status</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <tr><td colspan="6" class="loading-cell">Loading student records...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <h3>📚 Smart Library Management System</h3>
+        <p>Connected to Neon Serverless Postgres (Single Administrator Mode)</p>
+    </footer>
+
+    <script src="admin.js"></script>
+</body>
+</html>
+

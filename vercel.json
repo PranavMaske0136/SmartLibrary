@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/website/(.*)", "destination": "/website/$1" },
+    { "source": "/chatbot/(.*)", "destination": "/chatbot/$1" },
+    { "source": "/", "destination": "/website/index.html" }
+  ]
+}
+
