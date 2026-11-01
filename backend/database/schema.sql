@@ -104,7 +104,7 @@ INSERT INTO books (title, author, category, quantity, available_copies) VALUES
 -- Note: System permits exactly ONE administrator account.
 -- -----------------------------------------------------------------------------
 INSERT INTO students (student_id, name, email, password_hash, role) VALUES
-('ADM001', 'System Administrator', 'admin@smartlibrary.edu', 'admin123', 'admin'),
+('ADM001', 'Administrator', 'admin@smartlibrary.edu', 'admin123', 'admin'),
 ('STU101', 'John Doe', 'john.doe@student.edu', 'password123', 'student'),
 ('STU102', 'Jane Smith', 'jane.smith@student.edu', 'password123', 'student'),
 ('STU103', 'Alex Rivera', 'alex.rivera@student.edu', 'password123', 'student');

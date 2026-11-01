@@ -7,7 +7,7 @@
 const DEFAULT_ACCOUNTS = [
     {
         studentId: "ADM001",
-        name: "System Administrator",
+        name: "Administrator",
         email: "admin@smartlibrary.edu",
         password: "admin123",
         role: "admin"
