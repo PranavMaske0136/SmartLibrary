@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Library Assistant | Smart Library</title>
+
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+
+<body>
+
+    <div class="chat-app">
+
+        <!-- Chat Header -->
+        <header class="chat-header">
+
+            <a href="../website/index.html" class="back-button">
+                ← Home
+            </a>
+
+            <div class="assistant-profile">
+
+                <div class="bot-avatar">🤖</div>
+
+                <div>
+                    <h2>Smart Library Assistant</h2>
+                    <p>● Online | English Support</p>
+                </div>
+
+            </div>
+
+            <button id="clearChat" class="clear-button">
+                Clear Chat
+            </button>
+
+        </header>
+
+
+        <!-- Chat Messages -->
+        <main class="chat-main">
+
+            <div class="chat-intro">
+
+                <div class="intro-icon">📚</div>
+
+                <h1>How can I help you?</h1>
+
+                <p>
+                    Ask me about books, authors and categories
+                    available in our library.
+                </p>
+
+            </div>
+
+
+            <div class="chat-messages" id="chatMessages">
+
+                <div class="message bot-message">
+
+                    <div class="message-avatar">🤖</div>
+
+                    <div class="message-content">
+
+                        <p>
+                            Hello! Welcome to Smart Library.
+
+                            I am your Library Assistant.
+                            I can help you find books and
+                            explore our library collection.
+
+                            Please ask your questions in English.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Suggested Questions -->
+            <div class="suggestions">
+
+                <button class="suggestion-btn">
+                    Find programming books
+                </button>
+
+                <button class="suggestion-btn">
+                    Search books by author
+                </button>
+
+                <button class="suggestion-btn">
+                    Recommend a book
+                </button>
+
+            </div>
+
+        </main>
+
+
+        <!-- Chat Input -->
+        <footer class="chat-footer">
+
+            <form id="chatForm" class="chat-input-area">
+
+                <input
+                    type="text"
+                    id="userMessage"
+                    placeholder="Ask something about our books..."
+                    autocomplete="off"
+                    required
+                >
+
+                <button type="submit" id="sendButton">
+                    Send ➤
+                </button>
+
+            </form>
+
+            <p class="chat-disclaimer">
+                Answers are limited to our library dataset.
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    
+<script src="books-data.js"></script>
+<script src="chatbot.js"></script>
+
+
+</body>
+
+</html>

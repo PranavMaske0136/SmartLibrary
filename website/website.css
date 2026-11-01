@@ -1,0 +1,1192 @@
+
+/* =================================
+   1. BASIC SETTINGS
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    color: #172033;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =================================
+   2. NAVIGATION BAR
+================================= */
+
+.navbar {
+    width: 100%;
+    min-height: 75px;
+    padding: 15px 8%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: white;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 22px;
+    font-weight: 800;
+    color: #173b65;
+}
+
+.logo-icon {
+    font-size: 28px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    color: #475569;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #2563eb;
+}
+
+.nav-button {
+    background: #2563eb;
+    color: white;
+
+    padding: 10px 25px;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-button:hover {
+    background: #173b65;
+    transform: translateY(-2px);
+}
+
+
+/* =================================
+   3. HERO SECTION
+================================= */
+
+.hero {
+    min-height: 530px;
+    padding: 80px 10%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    background: linear-gradient(
+        120deg,
+        #eaf2ff,
+        #f5f8ff,
+        #eef5ff
+    );
+}
+
+.hero-content {
+    max-width: 580px;
+}
+
+.tag {
+    display: inline-block;
+
+    color: #2563eb;
+    background: #dceafe;
+
+    padding: 7px 14px;
+    border-radius: 30px;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 58px);
+    line-height: 1.15;
+    margin: 25px 0;
+    color: #173b65;
+    font-weight: 800;
+}
+
+.hero h1 span {
+    display: block;
+    color: #2563eb;
+}
+
+.hero-content p {
+    color: #64748b;
+    font-size: 16px;
+    max-width: 480px;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 13px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.primary-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #173b65;
+    transform: translateY(-3px);
+}
+
+.secondary-btn {
+    background: white;
+    color: #2563eb;
+    border: 1px solid #cbd5e1;
+}
+
+.secondary-btn:hover {
+    background: #eaf2ff;
+}
+
+
+/* Hero Illustration Card */
+
+.hero-image {
+    width: 320px;
+    min-height: 300px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #173b65
+    );
+
+    border-radius: 25px;
+    box-shadow: 0 20px 45px rgba(37, 99, 235, 0.2);
+
+    transform: rotate(2deg);
+}
+
+.book-card {
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    text-align: center;
+    width: 80%;
+    transform: rotate(-2deg);
+}
+
+.book-card span {
+    font-size: 65px;
+}
+
+.book-card h3 {
+    color: #173b65;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.book-card p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* =================================
+   4. SERVICES SECTION
+================================= */
+
+.services {
+    padding: 85px 8%;
+    text-align: center;
+}
+
+.section-heading h2 {
+    font-size: 34px;
+    color: #173b65;
+    margin-top: 15px;
+}
+
+.section-heading p {
+    color: #64748b;
+    margin-top: 10px;
+}
+
+.service-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+
+    margin-top: 45px;
+}
+
+.service-card {
+    background: white;
+    padding: 35px 25px;
+
+    border-radius: 15px;
+    border: 1px solid #e2e8f0;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+
+    transition: 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12);
+}
+
+.service-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.service-card h3 {
+    color: #173b65;
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.service-card p {
+    color: #64748b;
+    font-size: 14px;
+    min-height: 70px;
+    margin-bottom: 25px;
+}
+
+.card-btn {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+
+    padding: 11px 20px;
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: 0.3s;
+}
+
+.card-btn:hover {
+    background: #173b65;
+}
+
+
+/* Chatbot Card */
+
+.ai-card {
+    border: 1px solid #c4b5fd;
+}
+
+.ai-card .card-btn {
+    background: #7544c8;
+}
+
+.ai-card .card-btn:hover {
+    background: #542a9e;
+}
+
+
+/* =================================
+   5. ABOUT SECTION
+================================= */
+
+.about {
+    padding: 75px 10%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    background: #eaf2ff;
+}
+
+.about-content {
+    max-width: 650px;
+}
+
+.about-content h2 {
+    color: #173b65;
+    font-size: 32px;
+    margin: 18px 0;
+}
+
+.about-content p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+.about-highlight {
+    min-width: 200px;
+    padding: 30px;
+
+    text-align: center;
+    background: white;
+    border-radius: 15px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.about-highlight span {
+    font-size: 45px;
+}
+
+.about-highlight h3 {
+    color: #2563eb;
+    font-size: 28px;
+}
+
+.about-highlight p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* =================================
+   6. FOOTER
+================================= */
+
+.footer {
+    background: #173b65;
+    color: white;
+
+    padding: 35px 15px;
+    text-align: center;
+}
+
+.footer h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.footer p {
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+.copyright {
+    margin-top: 18px;
+}
+
+
+/* =================================
+   7. TABLET RESPONSIVE DESIGN
+================================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+        padding: 65px 6%;
+    }
+
+    .service-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about {
+        padding: 60px 6%;
+    }
+
+}
+
+
+/* =================================
+   8. MOBILE RESPONSIVE DESIGN
+================================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 14px 5%;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .nav-button {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding: 55px 6%;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-image {
+        width: 90%;
+        min-height: 240px;
+    }
+
+    .services {
+        padding: 60px 6%;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+    .service-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .service-card {
+        padding: 30px 20px;
+    }
+
+    .about {
+        padding: 55px 7%;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-content h2 {
+        font-size: 26px;
+    }
+
+    .about-highlight {
+        width: 100%;
+    }
+
+}
+
+/* =====================================
+   9. LOGIN PAGE DESIGN
+===================================== */
+
+.login-page {
+    min-height: 100vh;
+    background: #eef4ff;
+}
+
+.login-container {
+    min-height: 80vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 460px;
+
+    background: white;
+    padding: 40px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+
+    text-align: center;
+}
+
+.login-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.login-card h1 {
+    color: #173b65;
+    font-size: 27px;
+    margin-top: 18px;
+}
+
+.login-description {
+    color: #64748b;
+    font-size: 14px;
+    margin: 10px 0 28px;
+}
+
+#loginForm {
+    text-align: left;
+}
+
+#loginForm label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    color: #334155;
+    margin: 17px 0 7px;
+}
+
+#loginForm input,
+#loginForm select {
+    width: 100%;
+    padding: 13px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+
+    font-size: 14px;
+    outline: none;
+    background: white;
+}
+
+#loginForm input:focus,
+#loginForm select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.password-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.password-wrapper input {
+    flex: 1;
+    min-width: 0;
+}
+
+.password-wrapper button {
+    border: none;
+    background: #eaf2ff;
+    color: #2563eb;
+
+    padding: 12px;
+    border-radius: 7px;
+
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.login-submit {
+    width: 100%;
+    margin-top: 25px;
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-submit:hover {
+    background: #173b65;
+    transform: translateY(-2px);
+}
+
+.login-message {
+    margin-top: 15px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.login-message.success {
+    color: #15803d;
+}
+
+.login-message.error {
+    color: #dc2626;
+}
+
+.login-note {
+    margin-top: 25px;
+    padding: 15px;
+
+    background: #f1f5f9;
+    border-radius: 8px;
+
+    color: #64748b;
+    font-size: 12px;
+}
+
+.login-note p + p {
+    margin-top: 5px;
+}
+
+.demo-note {
+    color: #b45309;
+    font-size: 11px;
+    margin-top: 15px;
+}
+
+@media (max-width: 500px) {
+
+    .login-card {
+        padding: 25px 20px;
+    }
+
+    .login-card h1 {
+        font-size: 23px;
+    }
+
+}
+
+/* =====================================
+   10. STUDENT PORTAL
+===================================== */
+
+.student-page {
+    background: #f8fafc;
+}
+
+.student-welcome {
+    padding: 65px 10%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    background: linear-gradient(
+        120deg,
+        #eaf2ff,
+        #f5f8ff
+    );
+}
+
+.student-welcome h1 {
+    color: #173b65;
+    font-size: clamp(30px, 4vw, 42px);
+    margin: 18px 0 10px;
+}
+
+.student-welcome p {
+    color: #64748b;
+    max-width: 550px;
+}
+
+.student-welcome-icon {
+    font-size: 100px;
+}
+
+
+/* Dashboard Cards */
+
+.student-dashboard {
+    padding: 45px 8%;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.student-stat-card {
+    background: white;
+    padding: 28px;
+    border-radius: 14px;
+
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+
+    transition: 0.3s;
+}
+
+.student-stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.student-stat-card span {
+    font-size: 35px;
+}
+
+.student-stat-card h3 {
+    color: #173b65;
+    margin: 12px 0 5px;
+}
+
+.student-stat-card p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+
+/* Book Collection */
+
+.student-books {
+    padding: 60px 8%;
+    text-align: center;
+}
+
+.student-search {
+    display: flex;
+    max-width: 550px;
+    margin: 30px auto;
+    gap: 10px;
+}
+
+.student-search input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.student-search button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+}
+
+.student-search button:disabled,
+.student-search input:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.empty-books {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 45px 20px;
+
+    background: white;
+    border: 1px dashed #cbd5e1;
+    border-radius: 15px;
+}
+
+.empty-books span {
+    font-size: 55px;
+}
+
+.empty-books h3 {
+    color: #173b65;
+    margin: 15px 0 8px;
+}
+
+.empty-books p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* AI Assistant */
+
+.student-assistant {
+    margin: 30px 8% 70px;
+    padding: 40px;
+
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    background: #f0eafe;
+    border: 1px solid #d8c7f5;
+    border-radius: 18px;
+}
+
+.assistant-icon {
+    font-size: 75px;
+}
+
+.assistant-content h2 {
+    color: #173b65;
+    margin: 15px 0 8px;
+}
+
+.assistant-content p {
+    color: #64748b;
+    margin-bottom: 22px;
+}
+
+.assistant-content .primary-btn {
+    display: inline-block;
+}
+
+
+/* Student Mobile Responsive */
+
+@media (max-width: 700px) {
+
+    .student-welcome {
+        padding: 45px 6%;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .student-welcome-icon {
+        font-size: 70px;
+    }
+
+    .student-dashboard {
+        grid-template-columns: 1fr;
+        padding: 30px 6%;
+    }
+
+    .student-books {
+        padding: 45px 6%;
+    }
+
+    .student-search {
+        flex-direction: column;
+    }
+
+    .student-search button {
+        width: 100%;
+    }
+
+    .student-assistant {
+        margin: 20px 6% 50px;
+        padding: 30px 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .assistant-icon {
+        font-size: 55px;
+    }
+
+}
+
+/* =====================================
+   STUDENT BOOK DISPLAY
+===================================== */
+
+.student-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.student-welcome {
+    text-align: center;
+    padding: 35px 20px;
+    background: #eef4ff;
+    border-radius: 12px;
+    margin-bottom: 35px;
+}
+
+.student-welcome h1 {
+    margin-bottom: 10px;
+    color: #1d3557;
+}
+
+.student-book-section {
+    margin-bottom: 40px;
+}
+
+.student-book-section h2 {
+    margin-bottom: 10px;
+}
+
+#bookSearch {
+    width: 100%;
+    padding: 14px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#bookCount {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.student-book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.student-book-card {
+    background: white;
+    padding: 22px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+.student-book-card h3 {
+    color: #1d3557;
+    margin-bottom: 12px;
+}
+
+.student-book-card p {
+    margin: 8px 0;
+    color: #555;
+    overflow-wrap: anywhere;
+}
+
+.no-books-message {
+    padding: 25px;
+    text-align: center;
+    background: #f5f5f5;
+    border-radius: 8px;
+    color: #555;
+}
+
+.student-assistant {
+    padding: 25px;
+    background: #eef4ff;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.student-chat-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 22px;
+    background: #1d3557;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+.student-chat-link:hover {
+    background: #345b8c;
+}
+
+@media (max-width: 600px) {
+    .student-container {
+        padding: 12px;
+        margin: 20px auto;
+    }
+
+    .student-welcome {
+        padding: 25px 12px;
+    }
+
+    .student-book-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================
+   STUDENT BOOK DISPLAY
+===================================== */
+
+.student-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.student-welcome {
+    text-align: center;
+    padding: 35px 20px;
+    background: #eef4ff;
+    border-radius: 12px;
+    margin-bottom: 35px;
+}
+
+.student-welcome h1 {
+    margin-bottom: 10px;
+    color: #1d3557;
+}
+
+.student-book-section {
+    margin-bottom: 40px;
+}
+
+.student-book-section h2 {
+    margin-bottom: 10px;
+}
+
+#bookSearch {
+    width: 100%;
+    padding: 14px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#bookCount {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.student-book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.student-book-card {
+    background: white;
+    padding: 22px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+.student-book-card h3 {
+    color: #1d3557;
+    margin-bottom: 12px;
+}
+
+.student-book-card p {
+    margin: 8px 0;
+    color: #555;
+    overflow-wrap: anywhere;
+}
+
+.no-books-message {
+    padding: 25px;
+    text-align: center;
+    background: #f5f5f5;
+    border-radius: 8px;
+    color: #555;
+}
+
+.student-assistant {
+    padding: 25px;
+    background: #eef4ff;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.student-chat-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 22px;
+    background: #1d3557;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+.student-chat-link:hover {
+    background: #345b8c;
+}
+
+@media (max-width: 600px) {
+    .student-container {
+        padding: 12px;
+        margin: 20px auto;
+    }
+
+    .student-welcome {
+        padding: 25px 12px;
+    }
+
+    .student-book-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================
+   ADVANCED STUDENT BOOK FILTERS
+===================================== */
+
+.student-filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.student-filters input,
+.student-filters select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+    box-sizing: border-box;
+}
+
+.book-available {
+    color: #16803c !important;
+    font-weight: bold;
+}
+
+.book-unavailable {
+    color: #c0392b !important;
+    font-weight: bold;
+}
+
+@media (max-width: 700px) {
+
+    .student-filters {
+        grid-template-columns: 1fr;
+    }
+
+}

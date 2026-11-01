@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Smart Library</title>
+    <link rel="stylesheet" href="website.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">Smart Library</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="login.html">Logout</a>
+        </nav>
+    </header>
+
+    <main class="student-container">
+
+        <section class="student-welcome">
+            <h1>Student Portal</h1>
+            <p>Welcome to your Smart Library!</p>
+        </section>
+
+        <section class="student-book-section">
+            <h2>Explore Library Books</h2>
+            <p>Search books by title, author, or category.</p>
+
+            
+<div class="student-filters">
+
+    <input
+        type="text"
+        id="bookSearch"
+        placeholder="Search by book title or author..."
+    >
+
+    <select id="categoryFilter">
+        <option value="">All Categories</option>
+    </select>
+
+    <select id="availabilityFilter">
+        <option value="">All Books</option>
+        <option value="available">Available Books</option>
+        <option value="unavailable">Unavailable Books</option>
+    </select>
+
+</div>
+
+<p id="bookCount">Loading books...</p>
+
+<div id="studentBookList" class="student-book-grid">
+</div>
+
+<p id="noBooksMessage" class="no-books-message" hidden>
+    No books found. Try another search.
+</p>
+
+            </p>
+        </section>
+
+        <section class="student-assistant">
+            <h2>Need Help?</h2>
+            <p>Ask our Smart Library Assistant about books.</p>
+            <a href="../chatbot/chatbot.html" class="student-chat-link">
+                Open Library Assistant
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; <span id="year"></span> Smart Library Management System</p>
+    </footer>
+
+    <script src="../chatbot/books-data.js"></script>
+    <script src="website.js"></script>
+    <script src="student.js"></script>
+
+</body>
+</html>

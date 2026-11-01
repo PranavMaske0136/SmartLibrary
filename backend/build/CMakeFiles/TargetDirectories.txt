@@ -1,0 +1,3 @@
+C:/Users/Pranav Maske/OneDrive/Desktop/SmartLibrary/backend/build/CMakeFiles/smartlibrary_server.dir
+C:/Users/Pranav Maske/OneDrive/Desktop/SmartLibrary/backend/build/CMakeFiles/edit_cache.dir
+C:/Users/Pranav Maske/OneDrive/Desktop/SmartLibrary/backend/build/CMakeFiles/rebuild_cache.dir

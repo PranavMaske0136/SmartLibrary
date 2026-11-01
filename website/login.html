@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Smart Library</title>
+
+    <link rel="stylesheet" href="website.css">
+</head>
+
+<body class="login-page">
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">📚</span>
+            <span>Smart Library</span>
+        </div>
+
+        <a href="index.html" class="nav-button">
+            Back to Home
+        </a>
+
+    </header>
+
+
+    <main class="login-container">
+
+        <div class="login-card">
+
+            <div class="login-icon">🔐</div>
+
+            <span class="tag">WELCOME BACK</span>
+
+            <h1>Login to Smart Library</h1>
+
+            <p class="login-description">
+                Select your account type and enter your details.
+            </p>
+
+
+            <form id="loginForm">
+
+                <!-- Account Type -->
+                <label for="loginRole">Login As</label>
+
+                <select id="loginRole" required>
+
+                    <option value="">Select Account Type</option>
+
+                    <option value="admin">Admin</option>
+
+                    <option value="student">Student</option>
+
+                </select>
+
+
+                <!-- Email -->
+                <label for="email">Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+
+                <!-- Password -->
+                <label for="password">Password</label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                        minlength="6"
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+
+                <!-- Login Button -->
+                <button type="submit" class="login-submit">
+
+                    Login to Account
+
+                </button>
+
+
+                <!-- Login Message -->
+                <p id="loginMessage" class="login-message"></p>
+
+            </form>
+
+
+            <div class="login-note">
+
+                <p>
+                    New to Smart Library?
+                </p>
+
+                <p>
+                    Contact your Library Administrator
+                    for account access.
+                </p>
+
+            </div>
+
+            <p class="demo-note">
+                Demo interface only. Authentication will be
+                connected in a later development step.
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <h3>📚 Smart Library</h3>
+
+        <p>Making Library Management Smarter and Easier.</p>
+
+    </footer>
+
+
+    <script src="website.js"></script>
+
+</body>
+
+</html>
