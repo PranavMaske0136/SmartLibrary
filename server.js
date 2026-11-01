@@ -426,8 +426,8 @@ app.get('/api/auth/verify-jwks', async (req, res) => {
 // =============================================================================
 // 6. STATIC WEB APP & ASSETS
 // =============================================================================
-app.use('/website', express.static(path.join(__dirname, 'website')));
-app.use('/chatbot', express.static(path.join(__dirname, 'chatbot')));
+app.use('/website', express.static(path.join(process.cwd(), 'website')));
+app.use('/chatbot', express.static(path.join(process.cwd(), 'chatbot')));
 
 // Redirect root to website home
 app.get('/', (req, res) => {
@@ -453,4 +453,7 @@ if (!process.env.VERCEL) {
     });
 }
 
-module.exports = { app, server };
+// Export Express app directly as the default export for Vercel Serverless compatibility
+module.exports = app;
+module.exports.app = app;
+module.exports.server = server;
