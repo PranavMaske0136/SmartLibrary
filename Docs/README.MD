@@ -1,7 +1,7 @@
 # Smart Library Management System - Complete Technical Documentation
 ### Cloud Production Edition: Neon Serverless Postgres, Neon Auth & Vercel Serverless Hosting
 
-Welcome to the definitive technical documentation and architectural reference for the **Smart Library Management System** (`SmartLibrary`). This document details the system design, tech stack, cloud PostgreSQL architecture on Neon, serverless hosting on Vercel, dedicated Administrator Control Center, student patron services, real-time AI chatbot, and complete step-by-step execution guide.
+Welcome to the definitive technical documentation and architectural reference for the **Smart Library Management System** (`SmartLibrary`). This document details the system design, tech stack, cloud PostgreSQL architecture on Neon, global serverless hosting on Vercel (`smartlibrarydotin.vercel.app`), dedicated Administrator Control Center, student patron services, real-time AI chatbot, and complete step-by-step execution guide.
 
 ---
 
@@ -26,14 +26,15 @@ Welcome to the definitive technical documentation and architectural reference fo
 
 ## 1. Project Overview & Key Capabilities
 
-The **Smart Library Management System** is a full-stack, cloud-native educational library application backed by **Neon Serverless Postgres** (`production` branch) and hosted globally on **Vercel Serverless Functions**.
+The **Smart Library Management System** is a full-stack, cloud-native educational library application backed by **Neon Serverless Postgres** (`production` branch) and hosted globally on **Vercel Serverless Functions** at **`smartlibrarydotin.vercel.app`**.
 
 ### Key System Capabilities:
-1. **Dedicated Administrator Control Center (`website/admin.html`)**: Real-time KPI dashboard, dynamic book catalog management (live CRUD), circulation desk (issue and return workflow), and registered student rosters.
+1. **Dedicated Administrator Control Center (`website/admin.html`)**: Real-time KPI dashboard, dynamic book catalog management (live CRUD), circulation desk (issue and return workflow with instant book and student search), and registered student rosters.
 2. **Neon Serverless Postgres**: Live cloud database utilizing connection pooling (`DATABASE_URL`) for serverless web queries and unpooled direct connections (`DATABASE_URL_UNPOOLED`) for migrations.
 3. **Strict Single-Admin Architecture**: Enforces via database constraints and server middleware that only **one single Administrator account** exists across the entire system. Public registration is strictly reserved for Student Patrons.
 4. **Real-Time Synchronized AI Assistant (`chatbot/chatbot.html`)**: In-browser natural language assistant connected directly to live Neon PostgreSQL via `/api/books`, supporting bidirectional sentence matching, stock checks, author queries, and recommendation engines.
-5. **Hybrid Execution (Local + Cloud)**: Fully operational locally on Node.js / Express and globally distributed on Vercel Serverless Functions.
+5. **Interactive Student Portal (`website/student.html`)**: Real-time multi-field catalog search across Title, Author, and Category, with dynamic category filters and shelf availability indicators.
+6. **Hybrid Execution (Local + Cloud)**: Fully operational locally on Node.js / Express and globally distributed on Vercel Serverless Functions with zero configuration drift.
 
 ---
 
@@ -43,12 +44,12 @@ The application is deployed live in production:
 
 | Service | Live Production URL | Notes |
 | :--- | :--- | :--- |
-| **Production Home** | [https://smartlibrary-olive.vercel.app](https://smartlibrary-olive.vercel.app) | Public Landing Page |
-| **Admin Portal** | [https://smartlibrary-olive.vercel.app/website/admin.html](https://smartlibrary-olive.vercel.app/website/admin.html) | Control Center for Administrator |
-| **Sign In / Register** | [https://smartlibrary-olive.vercel.app/website/login.html](https://smartlibrary-olive.vercel.app/website/login.html) | Patron & Admin authentication |
-| **Student Portal** | [https://smartlibrary-olive.vercel.app/website/student.html](https://smartlibrary-olive.vercel.app/website/student.html) | Live catalog search & shelf availability |
-| **AI Assistant** | [https://smartlibrary-olive.vercel.app/chatbot/chatbot.html](https://smartlibrary-olive.vercel.app/chatbot/chatbot.html) | Database-synced AI chatbot |
-| **PostgreSQL Health API** | [https://smartlibrary-olive.vercel.app/api/health](https://smartlibrary-olive.vercel.app/api/health) | Live DB ping & table statistics |
+| **Production Home** | [https://smartlibrarydotin.vercel.app](https://smartlibrarydotin.vercel.app) | Official Public Landing Page |
+| **Admin Portal** | [https://smartlibrarydotin.vercel.app/website/admin.html](https://smartlibrarydotin.vercel.app/website/admin.html) | Control Center for Administrator |
+| **Sign In / Register** | [https://smartlibrarydotin.vercel.app/website/login.html](https://smartlibrarydotin.vercel.app/website/login.html) | Secure Patron & Admin authentication |
+| **Student Portal** | [https://smartlibrarydotin.vercel.app/website/student.html](https://smartlibrarydotin.vercel.app/website/student.html) | Live catalog search & shelf availability |
+| **AI Assistant** | [https://smartlibrarydotin.vercel.app/chatbot/chatbot.html](https://smartlibrarydotin.vercel.app/chatbot/chatbot.html) | Database-synced AI chatbot |
+| **PostgreSQL Health API** | [https://smartlibrarydotin.vercel.app/api/health](https://smartlibrarydotin.vercel.app/api/health) | Live DB ping & table statistics |
 | **GitHub Repository** | [https://github.com/PranavMaske0136/SmartLibrary](https://github.com/PranavMaske0136/SmartLibrary) | Continuous Deployment source |
 
 ---
@@ -65,7 +66,7 @@ graph TD
         UI_Chatbot["AI Library Assistant<br/>(chatbot/chatbot.html & chatbot.js)"]
     end
 
-    subgraph Hosting_Vercel ["Vercel Global Cloud Edge"]
+    subgraph Hosting_Vercel ["Vercel Global Cloud Edge (smartlibrarydotin.vercel.app)"]
         VercelRouter["Vercel CDN & Routing Engine<br/>(vercel.json)"]
         ServerlessApp["Serverless Function Gateway<br/>(api/index.js -> server.js)"]
     end
@@ -100,12 +101,12 @@ graph TD
 
 | Layer | Component | Version / Identifier | Purpose & Specifications |
 | :--- | :--- | :--- | :--- |
-| **Cloud Hosting** | Vercel Serverless | Node.js 26.x Runtime | Zero-config serverless function deployment with Edge CDN asset distribution. |
+| **Cloud Hosting** | Vercel Serverless | Node.js 26.x Runtime | Zero-config serverless function deployment with Edge CDN asset distribution (`smartlibrarydotin.vercel.app`). |
 | **Cloud Database** | Neon Serverless Postgres | `super-cherry-81980462` | Serverless PostgreSQL in AWS `ap-southeast-2` with autoscaling and connection pooling. |
 | **Cloud Auth** | Neon Auth | Managed Better Auth | Token signing and identity verification over standard JWKS. |
 | **Backend Framework** | Node.js & Express 5 | Express `^5.3.0` | Dual-mode application server (runs standalone locally or serverless on Vercel). |
-| **Database Driver** | `@neondatabase/serverless` | `^1.2.0` | Neon's official driver using WebSockets and HTTP pipelining for low latency. |
-| **Frontend Stack** | HTML5, CSS3, Modern JS | Vanilla ES6+ | Responsive responsive web application with zero heavy client frameworks. |
+| **Database Driver** | `@neondatabase/serverless` | `^1.2.0` | Neon's official driver using WebSockets and HTTP pipelining for ultra-low latency. |
+| **Frontend Stack** | HTML5, CSS3, Modern JS | Vanilla ES6+ | Responsive web application with zero heavy client frameworks. |
 | **Native C++ Engine** | C++11 with CMake | MinGW-w64 / CMake 4.4 | Low-level native binary option linked with `libpq` and `ws2_32`. |
 
 ---
@@ -136,17 +137,18 @@ graph LR
     AdminDashboard --> KPIs["Live KPI Cards (Titles, Stock, Shelf, Loans, Students)"]
     AdminDashboard --> Tab1["📚 Book Catalog (Live Search & Delete Books)"]
     AdminDashboard --> Tab2["➕ Add New Book (Direct Insert into Neon Postgres)"]
-    AdminDashboard --> Tab3["🔄 Issue & Return Desk (Lending & Real-time Check-ins)"]
+    AdminDashboard --> Tab3["🔄 Issue & Return Desk (With Live Book & Student Search)"]
     AdminDashboard --> Tab4["🎓 Registered Students (Live Student Roster)"]
 ```
 
 ### Dashboard Capabilities:
 1. **Live Real-Time KPIs**: Dynamically computed from Neon PostgreSQL (`totalTitles`, `totalCopies`, `availableCopies`, `activeLoans`, `totalStudents`).
 2. **Book Catalog Management**: Search titles, inspect quantity vs. on-shelf copies, and delete books safely (guarded against active loans).
-3. **Add New Book**: Real-time form with instant validation that inserts new titles into Neon Postgres.
+3. **Add New Book**: Real-time form with instant validation that inserts new titles directly into Neon Postgres.
 4. **Issue & Return Circulation Desk**:
-   - Issue book modal dynamically querying available stock and registered students.
-   - Active borrowing table with **"Mark Returned ✓"** action that updates loan status to `returned` and restores shelf stock.
+   - **Live Book Search**: Instant search input above the dropdown to filter books by title, author, or category, with automatic selection on single match.
+   - **Live Student Search**: Instant search input above the dropdown to filter students by name, student code, or email, with automatic selection on single match.
+   - Active borrowing table with **"Mark Returned ✓"** action that updates loan status to `returned` and restores shelf stock in real-time.
 5. **Student Patron Roster**: Inspects enrolled students with Student Code, contact details, and registration dates.
 
 ---
@@ -230,11 +232,11 @@ Located at [`chatbot/chatbot.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Des
 | [`vercel.json`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/vercel.json) | Vercel routing rules, `/api/*` rewrites, and static asset bundle configuration. |
 | [`.vercelignore`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/.vercelignore) | Protects `.env`, `.git`, and C++ binary build files from deployment. |
 | [`website/index.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/index.html) | Public Landing Page introducing library services. |
-| [`website/admin.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/admin.html) | Single-pane Control Center UI for the Administrator. |
-| [`website/admin.js`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/admin.js) | Client logic for KPI dashboards, catalog CRUD, and issue/return desks. |
-| [`website/student.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/student.html) | Patron portal with live book search, category dropdowns, and stock badges. |
+| [`website/admin.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/admin.html) | Single-pane Control Center UI for the Administrator with live book and student search. |
+| [`website/admin.js`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/admin.js) | Client logic for KPI dashboards, catalog CRUD, live search filters, and issue/return desks. |
+| [`website/student.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/student.html) | Patron portal with live book search across title, author, and category, plus stock badges. |
 | [`website/student.js`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/student.js) | Dynamic book search and live Neon PostgreSQL fetching. |
-| [`website/login.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/login.html) | Unified authentication screen with Sign In and Student Registration tabs. |
+| [`website/login.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/login.html) | Clean authentication screen with Sign In and Student Registration tabs. |
 | [`website/website.js`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/website/website.js) | Authentication handler, form validators, and role-based redirect routing. |
 | [`chatbot/chatbot.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/chatbot/chatbot.html) | Conversational AI Assistant UI with live status indicator. |
 | [`chatbot/chatbot.js`](file:///c:/Users/Pranav%20Maske/OneDrive/Desktop/SmartLibrary/chatbot/chatbot.js) | AI Assistant logic with background `/api/books` database synchronization. |
@@ -249,13 +251,13 @@ Located at [`chatbot/chatbot.html`](file:///c:/Users/Pranav%20Maske/OneDrive/Des
 
 ### Option A: Via Live Production Website (Vercel)
 1. Open the Sign In page:  
-   👉 **[https://smartlibrary-olive.vercel.app/website/login.html?role=admin](https://smartlibrary-olive.vercel.app/website/login.html?role=admin)**
+   👉 **[https://smartlibrarydotin.vercel.app/website/login.html?role=admin](https://smartlibrarydotin.vercel.app/website/login.html?role=admin)**
 2. Enter Administrator Credentials:
    - **Email**: `admin@smartlibrary.edu`
    - **Password**: `admin123`
 3. Click **Sign In →**.
 4. You are automatically routed to the **Admin Control Center**:  
-   👉 **[https://smartlibrary-olive.vercel.app/website/admin.html](https://smartlibrary-olive.vercel.app/website/admin.html)**
+   👉 **[https://smartlibrarydotin.vercel.app/website/admin.html](https://smartlibrarydotin.vercel.app/website/admin.html)**
 
 ### Option B: Via Local Development Server
 1. Start the server:
