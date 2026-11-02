@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,36 +27,32 @@
             <h2>Explore Library Books</h2>
             <p>Search books by title, author, or category.</p>
 
-            
-<div class="student-filters">
+            <div class="student-filters">
+                <input
+                    type="text"
+                    id="bookSearch"
+                    placeholder="Search books by title, author, or category..."
+                    autocomplete="off"
+                >
 
-    <input
-        type="text"
-        id="bookSearch"
-        placeholder="Search by book title or author..."
-    >
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                </select>
 
-    <select id="categoryFilter">
-        <option value="">All Categories</option>
-    </select>
+                <select id="availabilityFilter">
+                    <option value="">All Books</option>
+                    <option value="available">Available Books</option>
+                    <option value="unavailable">Unavailable Books</option>
+                </select>
+            </div>
 
-    <select id="availabilityFilter">
-        <option value="">All Books</option>
-        <option value="available">Available Books</option>
-        <option value="unavailable">Unavailable Books</option>
-    </select>
+            <p id="bookCount">Loading books from Neon Database...</p>
 
-</div>
+            <div id="studentBookList" class="student-book-grid">
+            </div>
 
-<p id="bookCount">Loading books...</p>
-
-<div id="studentBookList" class="student-book-grid">
-</div>
-
-<p id="noBooksMessage" class="no-books-message" hidden>
-    No books found. Try another search.
-</p>
-
+            <p id="noBooksMessage" class="no-books-message" hidden>
+                No books found. Try another search.
             </p>
         </section>
 
