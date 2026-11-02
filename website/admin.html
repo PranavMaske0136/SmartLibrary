@@ -169,12 +169,26 @@
                 <form id="issueBookForm" class="issue-form-grid">
                     <div>
                         <label for="issueBookSelect">Select Book *</label>
+                        <input
+                            type="text"
+                            id="searchIssueBook"
+                            placeholder="🔍 Search book by title, author, or category..."
+                            class="issue-search-input"
+                            autocomplete="off"
+                        >
                         <select id="issueBookSelect" required>
                             <option value="">Loading available books...</option>
                         </select>
                     </div>
                     <div>
                         <label for="issueStudentSelect">Select Student *</label>
+                        <input
+                            type="text"
+                            id="searchIssueStudent"
+                            placeholder="🔍 Search student by name, ID, or email..."
+                            class="issue-search-input"
+                            autocomplete="off"
+                        >
                         <select id="issueStudentSelect" required>
                             <option value="">Loading students...</option>
                         </select>

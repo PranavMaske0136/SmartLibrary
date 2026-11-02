@@ -71,11 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 5. Load Books Table from Neon
+    // 5. Load Books Table & Issue Select from Neon
     let cachedBooks = [];
     async function loadBooks() {
         const tbody = document.getElementById("booksTableBody");
-        const bookSelect = document.getElementById("issueBookSelect");
 
         try {
             const res = await fetch("/api/books");
@@ -84,17 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
             cachedBooks = data.books || [];
 
             renderBooksTable(cachedBooks);
-
-            // Populate Issue select dropdown (only available books)
-            if (bookSelect) {
-                bookSelect.innerHTML = '<option value="">-- Choose an Available Book --</option>';
-                cachedBooks.filter(b => b.availableCopies > 0).forEach(book => {
-                    const opt = document.createElement("option");
-                    opt.value = book.id;
-                    opt.textContent = `${book.title} (${book.availableCopies} available)`;
-                    bookSelect.appendChild(opt);
-                });
-            }
+            populateIssueBookOptions(searchIssueBookInput ? searchIssueBookInput.value : "");
         } catch (err) {
             console.error("Error loading books:", err);
             if (tbody) tbody.innerHTML = `<tr><td colspan="7" class="error-cell">Error loading books from Neon: ${err.message}</td></tr>`;
@@ -190,22 +179,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 8. Load Students
+    // 8. Load Students & Issue Select
+    let cachedStudents = [];
     async function loadStudents() {
         const tbody = document.getElementById("studentsTableBody");
-        const studentSelect = document.getElementById("issueStudentSelect");
 
         try {
             const res = await fetch("/api/admin/students");
             if (!res.ok) throw new Error("Failed to load students");
             const data = await res.json();
-            const students = data.students || [];
+            cachedStudents = data.students || [];
 
             if (tbody) {
-                if (students.length === 0) {
+                if (cachedStudents.length === 0) {
                     tbody.innerHTML = '<tr><td colspan="6" class="empty-cell">No students registered yet.</td></tr>';
                 } else {
-                    tbody.innerHTML = students.map(s => `
+                    tbody.innerHTML = cachedStudents.map(s => `
                         <tr>
                             <td>#${s.id}</td>
                             <td><span class="code-badge">${s.studentId}</span></td>
@@ -218,19 +207,91 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            if (studentSelect) {
-                studentSelect.innerHTML = '<option value="">-- Choose a Student --</option>';
-                students.forEach(s => {
-                    const opt = document.createElement("option");
-                    opt.value = s.id;
-                    opt.textContent = `${s.name} (${s.studentId}) - ${s.email}`;
-                    studentSelect.appendChild(opt);
-                });
-            }
+            populateIssueStudentOptions(searchIssueStudentInput ? searchIssueStudentInput.value : "");
         } catch (err) {
             console.error("Error loading students:", err);
             if (tbody) tbody.innerHTML = `<tr><td colspan="6" class="error-cell">Error: ${err.message}</td></tr>`;
         }
+    }
+
+    // Dynamic Search & Filter for Issue Book Dropdown
+    function populateIssueBookOptions(query = "") {
+        const bookSelect = document.getElementById("issueBookSelect");
+        if (!bookSelect) return;
+
+        const q = (query || "").toLowerCase().trim();
+        const available = cachedBooks.filter(b => b.availableCopies > 0);
+        const filtered = q === "" 
+            ? available 
+            : available.filter(b => 
+                (b.title || "").toLowerCase().includes(q) ||
+                (b.author || "").toLowerCase().includes(q) ||
+                (b.category || "").toLowerCase().includes(q)
+            );
+
+        if (filtered.length === 0) {
+            bookSelect.innerHTML = `<option value="">-- No available books matching "${query}" --</option>`;
+            return;
+        }
+
+        const placeholder = q === "" 
+            ? `-- Choose an Available Book (${filtered.length} in stock) --`
+            : `-- Found ${filtered.length} matching book(s) --`;
+
+        bookSelect.innerHTML = `<option value="">${placeholder}</option>` + 
+            filtered.map(b => `<option value="${b.id}">${b.title} by ${b.author} (${b.availableCopies} available)</option>`).join("");
+
+        // Auto-select if filtered to exactly 1 book
+        if (filtered.length === 1 && q !== "") {
+            bookSelect.value = filtered[0].id;
+        }
+    }
+
+    // Dynamic Search & Filter for Issue Student Dropdown
+    function populateIssueStudentOptions(query = "") {
+        const studentSelect = document.getElementById("issueStudentSelect");
+        if (!studentSelect) return;
+
+        const q = (query || "").toLowerCase().trim();
+        const filtered = q === ""
+            ? cachedStudents
+            : cachedStudents.filter(s =>
+                (s.name || "").toLowerCase().includes(q) ||
+                (s.studentId || "").toLowerCase().includes(q) ||
+                (s.email || "").toLowerCase().includes(q)
+            );
+
+        if (filtered.length === 0) {
+            studentSelect.innerHTML = `<option value="">-- No students matching "${query}" --</option>`;
+            return;
+        }
+
+        const placeholder = q === ""
+            ? `-- Choose a Student (${filtered.length} registered) --`
+            : `-- Found ${filtered.length} matching student(s) --`;
+
+        studentSelect.innerHTML = `<option value="">${placeholder}</option>` +
+            filtered.map(s => `<option value="${s.id}">${s.name} (${s.studentId}) - ${s.email}</option>`).join("");
+
+        // Auto-select if filtered to exactly 1 student
+        if (filtered.length === 1 && q !== "") {
+            studentSelect.value = filtered[0].id;
+        }
+    }
+
+    // Wire live search listeners for Issue Form
+    const searchIssueBookInput = document.getElementById("searchIssueBook");
+    if (searchIssueBookInput) {
+        searchIssueBookInput.addEventListener("input", (e) => {
+            populateIssueBookOptions(e.target.value);
+        });
+    }
+
+    const searchIssueStudentInput = document.getElementById("searchIssueStudent");
+    if (searchIssueStudentInput) {
+        searchIssueStudentInput.addEventListener("input", (e) => {
+            populateIssueStudentOptions(e.target.value);
+        });
     }
 
     // 9. Load Circulation & Issues
@@ -293,6 +354,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 showAlert(`✓ ${data.message}`);
                 issueForm.reset();
+                if (searchIssueBookInput) searchIssueBookInput.value = "";
+                if (searchIssueStudentInput) searchIssueStudentInput.value = "";
+                populateIssueBookOptions("");
+                populateIssueStudentOptions("");
                 loadOverview();
                 loadBooks();
                 loadIssues();
